@@ -21,12 +21,12 @@ function App() {
         <Routes>         
             <Route exact path="/" element={<Entry/>} />
             <Route exact path="/login" element={<Login/>}/>
-            <Route path="/notes" element={<MyNotes/>}/>
+            <Route exact path="/notes" element={<MyNotes/>}/>
             <Route exact path="/home" element={<Home/>} />
-            <Route path="/videos" element={<MyVideo/>}/>
-            <Route path="/photos" element={<MyPhotos/>}/>
-            <Route path="/documents" element={<MyDocuments/>}/>
-            <Route path="/profile" element={<Profile/>}/>
+            <Route exact path="/videos" element={<MyVideo/>}/>
+            <Route exact path="/photos" element={<MyPhotos/>}/>
+            <Route exact path="/documents" element={<MyDocuments/>}/>
+            <Route exact path="/profile" element={<Profile/>}/>
             <Route path="/*" element={<Error404/>}/>
         </Routes>
       </BrowserRouter>

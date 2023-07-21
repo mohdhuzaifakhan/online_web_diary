@@ -9,8 +9,7 @@ function Home() {
 
   return (
     <div>
-      <NavBar />
-    
+      <NavBar />   
     </div>
   )
 }
