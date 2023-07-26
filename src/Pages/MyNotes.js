@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../NavBar'
-import { Box, Typography, ImageList, ImageListItem, Paper, ListItemButton, Menu, MenuItem, ListItemText, ListItemIcon, List, ListItem, Grid, IconButton, Snackbar, Button, Dialog, DialogActions, DialogContentText, DialogContent, DialogTitle, TextField, Stack } from '@mui/material'
-import { Cookie, Delete, Edit, EditNote, NoteAdd, SaveAs, Title } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
-import { database } from '../firebase/initialization'
-import { ref, set } from 'firebase/database'
+import { Box, Typography, Paper, ListItemButton, Menu, ListItemText, ListItemIcon, List, ListItem, Button, TextField, Stack } from '@mui/material'
+import { Delete, Edit, EditNote, NoteAdd, SaveAs} from '@mui/icons-material'
 import { db } from '../firebase/initialization'
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, FieldValue } from "firebase/firestore";
+import {setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import ListIcon from '@mui/icons-material/List';
 
 

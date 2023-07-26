@@ -1,35 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { auth } from './firebase/initialization'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { Box, FormControl, Grid, TextField, Button, Typography, CircularProgress } from '@mui/material'
+import { FormControl, Grid, TextField, Button, Typography, CircularProgress } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 
 function Login() {
     const navigate = useNavigate()
-    const [isloading ,setLoading] = useState(false);
+    const [isloading, setLoading] = useState(false);
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [helperTextForEmail, setHelperTextForEmail] = useState("");
     const [helperTextPassword, setHelperTextPassword] = useState("");
     const userInfo = JSON.parse(localStorage.getItem("user"))
 
-    useEffect(()=>{
-        if(userInfo){
+    useEffect(() => {
+        if (userInfo) {
             navigate('/notes')
         }
-    },[userInfo])
+    }, [userInfo])
 
     function login() {
 
-       
+
         setLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const {user} =  userCredential
+                const { user } = userCredential
                 setEmail("");
                 setPassword("")
-                localStorage.setItem("user",JSON.stringify({email:user.email,uid:user.uid}))
+                localStorage.setItem("user", JSON.stringify({ email: user.email, uid: user.uid }))
                 navigate('/notes')
                 // ...
             })
@@ -55,18 +55,18 @@ function Login() {
                 setPassword("")
                 // setHelperTextForEmail("");
                 // setHelperTextPassword("")
-                localStorage.setItem("user",JSON.stringify({email:user.user.email,uid:user.user.uid}))
+                localStorage.setItem("user", JSON.stringify({ email: user.user.email, uid: user.user.uid }))
                 navigate('/notes')
             })
             .catch((error) => {
                 const errorCode = error.code;
-                if (errorCode == "auth/email-already-in-use") {
+                if (errorCode === "auth/email-already-in-use") {
                     setHelperTextForEmail("This Email is already exist")
-                } else if (errorCode == "auth/weak-password") {
+                } else if (errorCode === "auth/weak-password") {
                     setHelperTextPassword("Weak password, password should be atleast 6 characters")
                 }
             });
-            setLoading(false)
+        setLoading(false)
     }
 
 
@@ -77,12 +77,14 @@ function Login() {
             direction="column"
             justifyContent="center"
             alignItems="center"
-            sx={{ height: '100vh', backgroundcolor:'snow' }}
+            sx={{ height: '100vh', backgroundcolor: 'snow' }}
         >
             <Grid>
-                <Typography variant='h4' color="info" mb={5} component="p" sx={{fontFamily:'serif'}}>
-                    Login to online web Diary
-                </Typography>
+                <div className="container lg:text-4xl md:text-3xl text-2xl sm:text-2xl my-2 mx-auto text-center p-2 font-serif">
+                    <h2>
+                        Login to online web Diary
+                    </h2>
+                </div>
             </Grid>
             <Grid sx={{ boxShadow: '5px', backgroundcolor: 'white' }}>
                 <FormControl component="form" autoComplete='off'>
@@ -94,8 +96,8 @@ function Login() {
                         value={password}
                         onChange={(e) => { setPassword(e.target.value) }}
                     />
-                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { login() }}>{!isloading ? "Sign In" : <CircularProgress size="26px"/>}</Button>
-                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { signUp() }}>{!isloading ? "Sign Up" : <CircularProgress/>}</Button>
+                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { login() }}>{!isloading ? "Sign In" : <CircularProgress size="26px" />}</Button>
+                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { signUp() }}>{!isloading ? "Sign Up" : <CircularProgress />}</Button>
                 </FormControl>
             </Grid>
         </Grid>

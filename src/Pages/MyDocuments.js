@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from '../NavBar'
-import { Box, Typography, ImageList, ImageListItem, Grid, IconButton, Snackbar, Button, Dialog, DialogActions, DialogContentText, DialogContent, DialogTitle, TextField } from '@mui/material'
+import { Box, Snackbar, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { Delete, UploadFile } from '@mui/icons-material'
 
 import { ref, uploadBytes, getDownloadURL, listAll } from 'firebase/storage'
