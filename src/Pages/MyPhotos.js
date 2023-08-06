@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../NavBar'
-import { Box, Snackbar, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
+import { Box,Tooltip, Snackbar, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { Co2Sharp, Delete } from '@mui/icons-material'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { ref, uploadBytes, getDownloadURL, listAll } from 'firebase/storage'
@@ -66,13 +66,17 @@ function MyPhotos() {
             <div className='text-end'>
               <div className='mx-1 inline w-14 mx-1 my-1'>
                 <Button variant='contained' size='small'>
+                  <Tooltip title="Delete photo" arrow>
                   <Delete />
+                  </Tooltip>
                   <div className='hidden lg:inline'> Delete Photos</div>
                 </Button>
               </div>
               <div className='mx-1 inline'>
                 <Button variant='contained' size="small" onClick={() => { handleClickOpen() }}>
+                  <Tooltip title="Add photo" arrow>
                   <AddPhotoAlternateIcon />
+                  </Tooltip>
                   <div className='hidden lg:inline'>Add Photos</div>
                 </Button>
               </div>

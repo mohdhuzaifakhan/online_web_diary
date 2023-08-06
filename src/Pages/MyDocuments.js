@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from '../NavBar'
-import { Box, Snackbar, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
+import { Box, Tooltip, Snackbar, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { Delete, UploadFile } from '@mui/icons-material'
 
 import { ref, uploadBytes, getDownloadURL, listAll } from 'firebase/storage'
@@ -66,19 +66,23 @@ function MyDocuments() {
       <div className="container mx-auto my-6">
         <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 mx-auto my-3">
           <div className='mx-5 my-1'>
-            <div className='text-3xl font-serif'><h2>My All Documents</h2></div>
+            <div className='text-3xl font-serif'><h2>My All Document</h2></div>
           </div>
           <div className='mx-5 my-1'>
             <div className='text-end'>
               <div className='mx-1 inline w-14 mx-1 my-1'>
                 <Button variant='contained' size='small'>
-                  <Delete />
+                  <Tooltip title="Delete documents" arrow>
+                    <Delete />
+                  </Tooltip>
                   <div className='hidden lg:inline'>Delete Document</div>
                 </Button>
               </div>
               <div className='mx-1 inline'>
                 <Button variant='contained' size="small" onClick={() => { handleClickOpen() }}>
-                  <UploadFile />
+                  <Tooltip title="Add document" arrow>
+                    <UploadFile />
+                  </Tooltip>
                   <div className='hidden lg:inline'>Add Documents</div>
                 </Button>
               </div>
@@ -134,7 +138,7 @@ function MyDocuments() {
                     <img src={img} className='w-44 h-38' />
                   </div>
                   <div className='justify-center flex mx-1 my-1 font-serif'>
-                    {fileName.slice(0,15)}...
+                    {fileName.slice(0, 15)}...
                   </div>
                   <div className='justify-center flex'>
                     <Button variant="contained" size='small' href={url}>Download</Button>

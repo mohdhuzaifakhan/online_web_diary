@@ -15,7 +15,7 @@ function Entry() {
   return (
     <>
 
-      <div className="bg-rose-700 flex h-screen w-full border justify-center items-center">
+      <div className="bg-rose-700 flex h-screen w-full justify-center items-center">
         <div className='-mt-28'>
           <div className="mx-4 my-2 text-center">
             <h2 className="fs-1 text-2xl lg:text-4xl md:text-3xl sm:text-2xl text-green text-green-500 font-serif">Online Web Diary</h2>

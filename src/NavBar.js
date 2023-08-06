@@ -30,7 +30,7 @@ function NavBar() {
         if (userInfo != null) {
             setUserInfo(userInfo);
             const user = auth.currentUser;
-            if(user != null){
+            if (user != null) {
                 setProfilePhotoUrl(user.photoURL)
             }
         } else {
@@ -38,6 +38,12 @@ function NavBar() {
         }
 
     }, [])
+
+
+    function logout() {
+        localStorage.removeItem("user");
+        navigate('/')
+    }
 
 
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -107,7 +113,11 @@ function NavBar() {
                     aria-haspopup="true"
                     color="inherit"
                 >
-                    <AccountCircle />
+                    {/* <AccountCircle /> */}
+                    {
+                        profilePhotoUrl ? <Avatar alt="Profile photo" src={profilePhotoUrl} /> :
+                            <AccountCircle />
+                    }
                 </IconButton>
                 <Typography>
                     Profile
@@ -205,7 +215,11 @@ function NavBar() {
                                     <ListItem disablePadding component={Link} to="/profile">
                                         <ListItemButton>
                                             <ListItemIcon>
-                                                <AccountCircle />
+                                                {/* <AccountCircle /> */}
+                                                {
+                                                    profilePhotoUrl ? <Avatar alt="Profile photo" src={profilePhotoUrl} /> :
+                                                        <AccountCircle />
+                                                }
                                             </ListItemIcon>
                                             <ListItemText primary="Profile" color='black' />
                                         </ListItemButton>
@@ -242,8 +256,8 @@ function NavBar() {
                                             <ListItemText primary="My Notes" />
                                         </ListItemButton>
                                     </ListItem>
-                                    <ListItem disablePadding component={Link} to="#">
-                                        <ListItemButton onClick={() => { localStorage.removeItem("user") }}>
+                                    <ListItem disablePadding onClick={() => { logout() }}>
+                                        <ListItemButton>
                                             <ListItemIcon>
                                                 <PowerSettingsNew />
                                             </ListItemIcon>

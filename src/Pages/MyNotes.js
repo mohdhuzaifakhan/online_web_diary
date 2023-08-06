@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../NavBar'
-import { Box, Typography, Paper, ListItemButton, Menu, ListItemText, ListItemIcon, List, ListItem, Button, TextField, Stack } from '@mui/material'
-import { Delete, Edit, EditNote, NoteAdd, SaveAs} from '@mui/icons-material'
+import { Box, Tooltip, Typography, Paper, ListItemButton, Menu, ListItemText, ListItemIcon, List, ListItem, Button, TextField, Stack } from '@mui/material'
+import { Delete, Edit, EditNote, NoteAdd, SaveAs } from '@mui/icons-material'
 import { db } from '../firebase/initialization'
-import {setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import ListIcon from '@mui/icons-material/List';
 
 
@@ -156,7 +156,9 @@ function MyNotes() {
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClick}
                 >
-                  <ListIcon />
+                  <Tooltip title="Delete" arrow>
+                    <ListIcon />
+                  </Tooltip>
                 </Button>
                 <Menu
                   id="basic-menu"
@@ -195,30 +197,38 @@ function MyNotes() {
                 </Menu>
               </div>
               <div className='mx-1 my-1 inline'>
-                <Button variant='contained' sx={{ marginTop: '2px' }} size="small" onClick={() => { newNote() }}>
-                  <NoteAdd />
-                  {/* <div className='hidden lg:inline'>Add New Note</div> */}
-                </Button>
+                <Tooltip title="Add note" arrow>
+                  <Button variant='contained' sx={{ marginTop: '2px' }} size="small" onClick={() => { newNote() }}>
+                    <NoteAdd />
+                    {/* <div className='hidden lg:inline'>Add New Note</div> */}
+                  </Button>
+                </Tooltip>
               </div>
               <div className='mx-1 my-1 inline'>
                 {
                   !flag ?
-                    <Button variant='contained' sx={{ marginTop: '2px' }} size='small' onClick={() => { handleSubmit() }}>
-                      <SaveAs />
-                      {/* <div className='hidden lg:inline'>save</div> */}
-                    </Button> :
-                    <Button variant='contained' sx={{ marginTop: '2px' }} size='small' onClick={(e) => { updateNote(e) }}>
-                      <SaveAs />
-                      {/* <div className='hidden lg:inline'>save</div> */}
-                    </Button>
+                    <Tooltip title="Save" arrow>
+                      <Button variant='contained' sx={{ marginTop: '2px' }} size='small' onClick={() => { handleSubmit() }}>
+                        <SaveAs />
+                        {/* <div className='hidden lg:inline'>save</div> */}
+                      </Button>
+                    </Tooltip> :
+                    <Tooltip title="Save" arrow>
+                      <Button variant='contained' sx={{ marginTop: '2px' }} size='small' onClick={(e) => { updateNote(e) }}>
+                        <SaveAs />
+                        {/* <div className='hidden lg:inline'>save</div> */}
+                      </Button>
+                    </Tooltip>
 
                 }
               </div>
               <div className="mx-1 my-1 inline">
-                <Button variant='contained' sx={{ marginTop: '2px' }} size='small' onClick={() => { makeNoteEditable() }}>
-                  <Edit />
-                  {/* <div className='hidden lg:inline'>edit</div> */}
-                </Button>
+                <Tooltip title="Edit" arrow>
+                  <Button variant='contained' sx={{ marginTop: '2px' }} size='small' onClick={() => { makeNoteEditable() }}>
+                    <Edit />
+                    {/* <div className='hidden lg:inline'>edit</div> */}
+                  </Button>
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -252,7 +262,9 @@ function MyNotes() {
                             </ListItemIcon>
                             <ListItemText primary={item.title} color='black' />
                             <ListItemIcon>
-                              <Delete onClick={() => { deleteNote(index) }} />
+                              <Tooltip title="Delete" arrow>
+                                <Delete onClick={() => { deleteNote(index) }} />
+                              </Tooltip>
                             </ListItemIcon>
                           </ListItemButton>
                         </ListItem>

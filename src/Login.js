@@ -96,8 +96,8 @@ function Login() {
                         value={password}
                         onChange={(e) => { setPassword(e.target.value) }}
                     />
-                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { login() }}>{!isloading ? "Sign In" : <CircularProgress size="26px" />}</Button>
-                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { signUp() }}>{!isloading ? "Sign Up" : <CircularProgress />}</Button>
+                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { login(); setLoading(true) }}>{!isloading ? "Sign In" : <CircularProgress size="26px" />}</Button>
+                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { signUp(); setLoading(true) }}>{!isloading ? "Sign Up" : <CircularProgress size="26px" />}</Button>
                 </FormControl>
             </Grid>
         </Grid>
