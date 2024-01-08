@@ -247,6 +247,8 @@ function MyNotes() {
                   </Typography>
                 </Paper>
               </Box>
+              {
+                !userData.files.length == 0 ?
               <List>
                 <Paper sx={{ padding: '12px', margin: '7px' }}>
                   {
@@ -272,14 +274,16 @@ function MyNotes() {
                     })
                   }
                 </Paper>
-              </List>
+                  </List> :
+                  null
+              }
             </Stack>
           </div>
           <div className="lg:col-span-2 col-span-3">
             <Stack direction='column'>
               <Box>
-                <Paper sx={{ padding: '12px', margin: '7px' }}>
-                  <TextField required label={tl} variant="standard"
+                <Paper sx={{ padding: '12px', margin: '7px', width: '100%' }}>
+                  <TextField required label={tl} variant="standard" sx={{ width: '100%' }}
                     value={title}
                     onChange={(e) => { setTitle(e.target.value) }}
                     InputLabelProps={{ shrink: true }}

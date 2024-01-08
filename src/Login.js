@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom'
 
 function Login() {
     const navigate = useNavigate()
-    const [isloading, setLoading] = useState(false);
+    const [Loginisloading, setLoginisLoading] = useState(false);
+    const [SignUpisloading, setSignUpisLoading] = useState(false);
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [helperTextForEmail, setHelperTextForEmail] = useState("");
@@ -23,7 +24,7 @@ function Login() {
     function login() {
 
 
-        setLoading(true)
+        setLoginisLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const { user } = userCredential
@@ -39,14 +40,15 @@ function Login() {
                 // console.log(errorCode)
                 // console.log(errorMessage)
                 setHelperTextForEmail("Email or password is wrong")
+                setLoginisLoading(false);
             });
-        setLoading(false);
+        setLoginisLoading(false);
 
     }
 
 
     function signUp() {
-        setLoading(true)
+        setSignUpisLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
             .then((user) => {
                 console.log(user.user.email)
@@ -62,11 +64,13 @@ function Login() {
                 const errorCode = error.code;
                 if (errorCode === "auth/email-already-in-use") {
                     setHelperTextForEmail("This Email is already exist")
+                    setSignUpisLoading(false)
                 } else if (errorCode === "auth/weak-password") {
                     setHelperTextPassword("Weak password, password should be atleast 6 characters")
+                    setSignUpisLoading(false)
                 }
             });
-        setLoading(false)
+        setSignUpisLoading(false)
     }
 
 
@@ -86,8 +90,8 @@ function Login() {
                     </h2>
                 </div>
             </Grid>
-            <Grid sx={{ boxShadow: '5px', backgroundcolor: 'white' }}>
-                <FormControl component="form" autoComplete='off'>
+            <Grid sx={{ boxShadow: '5px', backgroundcolor: 'white', width: '500px', textAlign: 'center' }}>
+                <FormControl component="form" autoComplete='off' sx={{ width: '75%' }}>
                     <TextField requirede id="email" helperText={helperTextForEmail} type='email' label="Email" variant="outlined" sx={{ margin: '5px' }}
                         value={email}
                         onChange={(e) => { setEmail(e.target.value) }}
@@ -96,8 +100,8 @@ function Login() {
                         value={password}
                         onChange={(e) => { setPassword(e.target.value) }}
                     />
-                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { login(); setLoading(true) }}>{!isloading ? "Sign In" : <CircularProgress size="26px" />}</Button>
-                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { signUp(); setLoading(true) }}>{!isloading ? "Sign Up" : <CircularProgress size="26px" />}</Button>
+                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { login(); setLoginisLoading(true) }}>{!Loginisloading ? "Sign In" : <CircularProgress size="26px" />}</Button>
+                    <Button variant="outlined" sx={{ margin: '5px' }} onClick={() => { signUp(); setSignUpisLoading(true) }}>{!SignUpisloading ? "Sign Up" : <CircularProgress size="26px" />}</Button>
                 </FormControl>
             </Grid>
         </Grid>

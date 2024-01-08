@@ -7,14 +7,13 @@ import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAEB3AyoJkZ_p_IDHX52jmPKFOaOdPNgYI",
-  authDomain: "web-diary-51e78.firebaseapp.com",
-  projectId: "web-diary-51e78",
-  storageBucket: "gs://web-diary-51e78.appspot.com/",
-  messagingSenderId: "968580365681",
-  appId: "1:968580365681:web:c1a33873a1d16efc924ad0",
-  measurementId: "G-XPWHBT3PWV",
-  databaseURL:"https://web-diary-51e78-default-rtdb.asia-southeast1.firebasedatabase.app/"
+  apiKey: "AIzaSyCsk7m5IjrCEewi6k-rcNXi2xj7qEW1ipA",
+  authDomain: "web-diary-3.firebaseapp.com",
+  projectId: "web-diary-3",
+  storageBucket: "web-diary-3.appspot.com",
+  messagingSenderId: "190841612688",
+  appId: "1:190841612688:web:3ee3b2a587eb8da101eb15",
+  measurementId: "G-W2HPG1PKW6"
 };
 
 

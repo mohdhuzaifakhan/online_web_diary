@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../NavBar'
-import { Box,Tooltip, Snackbar, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress';
+import { Box, Tooltip, Snackbar, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { Co2Sharp, Delete } from '@mui/icons-material'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { ref, uploadBytes, getDownloadURL, listAll } from 'firebase/storage'
@@ -13,26 +14,29 @@ function MyPhotos() {
   const [snackBarFlag, setSnackBarFlag] = useState(false)
   const [snackBarMsg, setSnackBarMsg] = useState("");
   const [allPhotos, setPhotos] = useState([])
+  const [flag, setFlag] = useState(false)
 
   useEffect(() => {
+    fetchData()
+  }, [])
+
+  function fetchData() {
     const photos = new Array();
     const storageRef = ref(storage, `images/${uid}`);
     listAll(storageRef).then((list) => {
-
       list.items.forEach((item) => {
         getDownloadURL(ref(storage, item._location.path_)).then((url) => {
           photos.push(url)
         })
       })
-
+      setPhotos(photos);
+      setFlag(true)
     }).catch((err) => {
       console.log("Some problem while fetching images")
       console.log(err);
     })
-    setPhotos(photos);
-  }, [])
 
-
+  }
   function UploadFiles() {
     const storageRef = ref(storage, `images/${uid}/${file.name}`);
     uploadBytes(storageRef, file).then((snapshot) => {
@@ -67,7 +71,7 @@ function MyPhotos() {
               <div className='mx-1 inline w-14 mx-1 my-1'>
                 <Button variant='contained' size='small'>
                   <Tooltip title="Delete photo" arrow>
-                  <Delete />
+                    <Delete />
                   </Tooltip>
                   <div className='hidden lg:inline'> Delete Photos</div>
                 </Button>
@@ -75,7 +79,7 @@ function MyPhotos() {
               <div className='mx-1 inline'>
                 <Button variant='contained' size="small" onClick={() => { handleClickOpen() }}>
                   <Tooltip title="Add photo" arrow>
-                  <AddPhotoAlternateIcon />
+                    <AddPhotoAlternateIcon />
                   </Tooltip>
                   <div className='hidden lg:inline'>Add Photos</div>
                 </Button>
@@ -121,26 +125,31 @@ function MyPhotos() {
       </Box>
 
       <div className="container mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 ">
+        {!flag ?
+          <div className="w-full text-center">
+            <CircularProgress />
+          </div>
+          :
+          <div className="grid grid-cols-2 content-center lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 ">
+            {
+              allPhotos.map((url) => {
+                console.log(url)
+                return (
+                  <div className="mx-1 my-1">
+                    <img src={url} className='w-48 h-32 mx-auto' height='180px' width='100%' style={{ borderRadius: '10px' }} />
+                  </div>
+                )
+              })
+            }
 
-          {
-            allPhotos.map((url) => {
-              console.log(url)
-              return (
-                <div className="mx-1 my-1">
-                  <img src={url} className='w-48 h-32 mx-auto' height='180px' width='100%' style={{ borderRadius: '10px' }} />
-                </div>
-              )
-            })
-          }
-
-        </div>
+          </div>
+        }
       </div>
+
+
 
     </>
   )
 }
 
 export default MyPhotos
-
-
