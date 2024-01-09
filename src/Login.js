@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from './firebase/initialization'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { FormControl, Grid, TextField, Button, Typography, CircularProgress } from '@mui/material'
+import { FormControl, Grid, TextField, Button, CircularProgress } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 
