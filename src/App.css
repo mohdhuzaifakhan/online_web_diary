@@ -13,6 +13,22 @@ a{
   color: black;
 }
 
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.font-serif {
+  font-family: 'Serif', sans-serif;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
